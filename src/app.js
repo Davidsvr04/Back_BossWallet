@@ -3,7 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
-const sequelize = require('./src/config/database');
+const sequelize = require('./config/database');
 
 dotenv.config();
 
@@ -25,10 +25,10 @@ sequelize.authenticate()
 sequelize.sync();
 
 // Rutas
-app.use('/api/auth', require('./src/routes/auth'));
-app.use('/api/accounts', require('./src/routes/accounts'));
-app.use('/api/transactions', require('./src/routes/transactions'));
-app.use('/api/budgets', require('./src/routes/budgets'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/accounts', require('./routes/accounts'));
+app.use('/api/transactions', require('./routes/transactions'));
+app.use('/api/budgets', require('./routes/budgets'));
 
 // Ruta de prueba
 app.get('/', (req, res) => {

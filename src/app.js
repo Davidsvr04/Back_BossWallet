@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const sequelize = require('./config/database');
+const { Usuario } = require('./models');
 
 dotenv.config();
 
@@ -25,10 +26,12 @@ sequelize.authenticate()
 sequelize.sync();
 
 // Rutas
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/accounts', require('./routes/accounts'));
-app.use('/api/transactions', require('./routes/transactions'));
-app.use('/api/budgets', require('./routes/budgets'));
+app.use('/api/usuarios', require('./routes/usuario.routes'));
+// TODO: Implementar estas rutas cuando sea necesario
+// app.use('/api/auth', require('./routes/auth'));
+// app.use('/api/accounts', require('./routes/accounts'));
+// app.use('/api/transactions', require('./routes/transactions'));
+// app.use('/api/budgets', require('./routes/budgets'));
 
 // Ruta de prueba
 app.get('/', (req, res) => {

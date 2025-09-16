@@ -27,11 +27,7 @@ sequelize.sync();
 
 // Rutas
 app.use('/api/users', require('./routes/User.routes'));
-// TODO: Implementar estas rutas cuando sea necesario
 // app.use('/api/auth', require('./routes/auth'));
-// app.use('/api/accounts', require('./routes/accounts'));
-// app.use('/api/transactions', require('./routes/transactions'));
-// app.use('/api/budgets', require('./routes/budgets'));
 
 // Ruta de prueba
 app.get('/', (req, res) => {

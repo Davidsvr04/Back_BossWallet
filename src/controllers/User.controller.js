@@ -6,14 +6,12 @@ const createUser = async (req, res) => {
   try {
     const { id_card, full_name, email, password } = req.body;
 
-    // Validate that all required fields are present
     if (!id_card || !full_name || !email || !password) {
       return res.status(400).json({
         error: 'All fields are required (id_card, full_name, email, password)'
       });
     }
 
-    // Check if email already exists
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({
@@ -21,11 +19,16 @@ const createUser = async (req, res) => {
       });
     }
 
-    // Encrypt password
+    const existingIdCard = await User.findOne({ where: { id_card } });
+    if (existingIdCard) {
+      return res.status(400).json({
+        error: 'ID card is already registered'
+      });
+    }
+
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Create the user
     const newUser = await User.create({
       id_card,
       full_name,
@@ -33,7 +36,6 @@ const createUser = async (req, res) => {
       password: hashedPassword
     });
 
-    // Respond without including the password
     const { password: _, ...userWithoutPassword } = newUser.toJSON();
 
     res.status(201).json({
@@ -53,7 +55,7 @@ const createUser = async (req, res) => {
 const getUsers = async (req, res) => {
   try {
     const users = await User.findAll({
-      attributes: { exclude: ['password'] } // Exclude passwords from response
+      attributes: { exclude: ['password'] } 
     });
 
     res.json({

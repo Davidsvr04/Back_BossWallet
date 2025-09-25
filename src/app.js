@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const sequelize = require('./config/database');
 const { User } = require('./models');
+const { Transaction } = require('./models');
+
 
 dotenv.config();
 
@@ -27,6 +29,7 @@ sequelize.sync();
 
 // Rutas
 app.use('/api/users', require('./routes/User.routes'));
+app.use('/api/transactions', require('./routes/transaction.routes'));
 // app.use('/api/auth', require('./routes/auth'));
 
 // Ruta de prueba

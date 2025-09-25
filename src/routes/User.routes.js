@@ -6,9 +6,9 @@ const {
   getUserById,
   updateUser,
   deleteUser
-} = require('../controllers/User.controller');
+} = require('../controllers/user.controller.js');
 
-// GET /api/users - Get all users
+// GET /api/users - Get all userss
 router.get('/', getUsers);
 
 // GET /api/users/:id - Get user by ID
